@@ -6,7 +6,7 @@
 		"start": "webpack-dev-server --mode development",
 		"build": "webpack --mode production",
 		"electron": "electron .",
-		"electron:dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+		"electron:dev": "concurrently -n=server,client -c=yellow,cyan \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
 		"electron:build": "npm run build && electron-builder",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -30,16 +30,10 @@
 			"category": "public.app-category.utilities"
 		},
 		"win": {
-			"target": [
-				"nsis"
-			]
+			"target": [ "nsis" ]
 		},
 		"linux": {
-			"target": [
-				"deb",
-				"rpm",
-				"AppImage"
-			],
+			"target": [ "deb", "rpm", "AppImage" ],
 			"category": "Utility"
 		}
 	},
