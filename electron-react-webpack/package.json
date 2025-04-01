@@ -6,14 +6,45 @@
 		"start": "webpack-dev-server --mode development",
 		"build": "webpack --mode production",
 		"electron": "electron .",
-		"dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"" ,		
+		"electron:dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+		"electron:build": "npm run build && electron-builder",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"description": "",
+	"build": {
+		"appId": "com.yourcompany.yourappname",
+		"productName": "electron-webpack",
+		"files": [
+			"main.js",
+			"dist/**/*",
+			"electron/**/*"
+		],
+		"directories": {
+			"buildResources": "assets",
+			"output": "release"
+		},
+		"mac": {
+			"category": "public.app-category.utilities"
+		},
+		"win": {
+			"target": [
+				"nsis"
+			]
+		},
+		"linux": {
+			"target": [
+				"deb",
+				"rpm",
+				"AppImage"
+			],
+			"category": "Utility"
+		}
+	},
 	"dependencies": {
+		"electron-is-dev": "^3.0.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0"
 	},
@@ -23,7 +54,7 @@
 		"babel-loader": "^10.0.0",
 		"concurrently": "^9.1.2",
 		"electron": "^35.1.2",
-		"electron-is-dev": "^3.0.1",
+		"electron-builder": "^26.0.12",
 		"html-webpack-plugin": "^5.6.3",
 		"wait-on": "^8.0.3",
 		"webpack": "^5.98.0",

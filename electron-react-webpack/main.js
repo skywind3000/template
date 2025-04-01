@@ -1,6 +1,6 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
-const isDev = require('electron-is-dev');
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import isDev from 'electron-is-dev';
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -15,7 +15,7 @@ function createWindow() {
   if (isDev) {
     win.loadURL('http://localhost:3000'); // 开发模式加载 Webpack Dev Server
   } else {
-    win.loadFile(path.join(__dirname, 'dist', 'index.html')); // 生产模式加载构建后的文件
+    win.loadFile(path.join(app.getAppPath(), 'dist', 'index.html')); // 生产模式加载构建后的文件
   }
 }
 
